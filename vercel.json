@@ -1,0 +1,15 @@
+{
+  "headers": [
+    {
+      "source": "/api/(.*)",
+      "headers": [
+        { "key": "Cache-Control", "value": "no-store" },
+        { "key": "X-Content-Type-Options", "value": "nosniff" }
+      ]
+    }
+  ],
+  "routes": [
+    { "src": "^/(admin|lib|tests)(/.*)?$", "status": 404 },
+    { "src": "^/(package(-lock)?\\.json|vercel\\.json|FEEDBACK_SETUP\\.md)$", "status": 404 }
+  ]
+}

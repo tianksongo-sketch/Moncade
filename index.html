@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>MOCA — Moncade · Pure Black. Pure White. Pure Fun.</title>
+<meta name="description" content="17 free minimalist arcade games. No accounts. No colors. Pure fun.">
+<meta name="theme-color" content="#05060a">
+<meta name="color-scheme" content="dark light">
+<script>try{var s=JSON.parse(localStorage.getItem("mc_settings")||"{}"),t=s.theme||"auto",d=matchMedia("(prefers-color-scheme: dark)").matches;document.documentElement.dataset.mode=t==="auto"?(d?"dark":"light"):t}catch(e){document.documentElement.dataset.mode="dark"}</script>
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="glass.css">
+</head>
+<body>
+
+<div id="bgfx" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i></div>
+
+<header id="nav">
+  <a class="brand" href="#" data-nav="home"><span class="logo-mark"></span><span>MO<b>CA</b></span></a>
+  <nav id="navlinks"><i id="navInd"></i>
+    <a href="#" data-nav="home" class="active">Home</a>
+    <a href="#" data-nav="games">All Games</a>
+    <a href="#" data-nav="favs">Favorites</a>
+    <a href="#" data-nav="stats">Statistics</a>
+  </nav>
+  <div class="nav-right">
+    <button id="soundBtn" class="icon-btn" title="Toggle sound">♪</button>
+    <button id="settingsBtn" class="icon-btn" title="Settings">⚙</button>
+  </div>
+</header>
+
+<main id="home">
+  <section id="hero">
+    <h1 id="logo" aria-label="MOCA"><span class="lt" style="--n:0" title="M"><span class="lt-in"><svg class="lt-i" viewBox="0 0 120 92" aria-hidden="true"><path fill="currentColor" d="M22 14 Q22 6 32 6 H88 Q98 6 98 14 L107 60 Q112 84 94 84 Q84 84 78 70 L70 60 H50 L42 70 Q36 84 26 84 Q8 84 13 60 Z"/><g fill="var(--page)"><rect x="26" y="34" width="8" height="24" rx="2"/><rect x="18" y="42" width="24" height="8" rx="2"/><circle cx="84" cy="34" r="5.5"/><circle cx="96" cy="46" r="5.5"/><circle cx="72" cy="46" r="5.5"/><circle cx="84" cy="58" r="5.5"/><rect x="50" y="20" width="20" height="5" rx="2.5"/></g></svg></span></span><span class="lt" style="--n:1" title="O"><span class="lt-in"><svg class="lt-i" viewBox="0 0 100 100" aria-hidden="true"><circle cx="50" cy="50" r="48" fill="currentColor"/><g fill="none" stroke="var(--page)" stroke-width="7" stroke-linejoin="miter" stroke-linecap="butt"><path d="M40 26 L50 12 L60 26"/><path d="M40 74 L50 88 L60 74"/><path d="M26 40 L12 50 L26 60"/><path d="M74 40 L88 50 L74 60"/></g></svg></span></span><span class="lt" style="--n:2" title="C"><span class="lt-in"><svg class="lt-i" viewBox="0 0 100 100" aria-hidden="true"><path fill="currentColor" d="M70 15.4 A40 40 0 1 0 84.6 70 A34 34 0 0 1 70 15.4 Z"/></svg></span></span><span class="lt" style="--n:3" title="A"><span class="lt-in"><svg class="lt-i" viewBox="0 0 100 100" aria-hidden="true"><rect x="46" y="4" width="34" height="18" rx="2" fill="currentColor"/><path fill="currentColor" d="M46 22 H80 V95 H46 Z"/><path fill="currentColor" d="M46 50 L12 60 L12 68 L46 60 Z"/><rect x="50" y="28" width="26" height="16" rx="2" fill="var(--page)"/><rect x="52" y="54" width="22" height="26" rx="2" fill="var(--page)" opacity=".3"/><rect x="40" y="92" width="46" height="6" rx="1" fill="currentColor"/></svg></span></span></h1>
+    <p class="tag">PURE BLACK. PURE WHITE. PURE FUN.</p>
+    <button class="btn big magnet" id="ctaPlay">▶ PLAY SOMETHING</button>
+    <p class="dim small"><span class="gcount">38</span> games · no account · no colors were harmed</p>
+  </section>
+
+  <section id="gstats" class="strip"></section>
+
+  <section id="recentSec" class="hidden"><h2 class="sec-h">RECENTLY PLAYED</h2><div id="recentRow"></div></section>
+
+  <section id="games">
+    <h2 class="sec-h">GAME COLLECTION</h2>
+    <div id="toolbar">
+      <input id="search" type="search" placeholder="Search games…  ( / )" autocomplete="off">
+      <div id="chips">
+        <button class="chip active" data-cat="all">All</button>
+        <button class="chip" data-cat="Classic">Classic</button>
+        <button class="chip" data-cat="Puzzle">Puzzle</button>
+        <button class="chip" data-cat="Reaction">Reaction</button>
+      </div>
+    </div>
+    <div id="grid"></div>
+    <p id="nores" class="dim hidden">Nothing found. Try another word — everything here is black &amp; white, not invisible.</p>
+  </section>
+
+  <section id="popSec"><h2 class="sec-h">MOST POPULAR</h2><div id="popRow"></div></section>
+
+  <footer>MOCA (Moncade) — built with vanilla HTML5 / Canvas / JS. Scores live in your browser.<br><button class="btn ghost small" id="fbOpen" type="button">Kirim feedback</button></footer>
+</main>
+
+<section id="allView" class="hidden">
+  <h2 class="sec-h">ALL GAMES</h2>
+  <div id="allBar"><input id="allSearch" type="search" placeholder="Search all games…" autocomplete="off"></div>
+  <div id="allList"></div>
+  <p id="allNores" class="dim hidden">Nothing found. Try another word.</p>
+</section>
+<nav id="azIndex" class="hidden" aria-label="A to Z index"></nav>
+
+<section id="favView" class="view hidden">
+  <h2 class="sec-h">FAVORITES ♥</h2>
+  <div id="favGrid" class="grid"></div>
+  <p id="favEmpty" class="dim hidden">No favorites yet. Tap the ♥ on any game card.</p>
+</section>
+
+<section id="statView" class="view hidden">
+  <h2 class="sec-h">STATISTICS</h2>
+  <div id="globalStats" class="strip"></div>
+  <div id="statTable"></div>
+</section>
+
+<div id="gameview" class="hidden">
+  <div class="gv-top">
+    <button class="icon-btn" id="gvBack" title="Back" aria-label="Back">✕</button>
+    <div class="gv-title"><h2 id="gvName"></h2><small id="gvTag"></small></div>
+    <div class="gv-actions">
+      <button class="icon-btn" id="gvFav" title="Favorite">♥</button>
+      <button class="icon-btn" id="gvHelp" title="Help">?</button>
+      <button class="icon-btn" id="gvFull" title="Fullscreen">⛶</button>
+    </div>
+  </div>
+  <div class="gv-hud">
+    <div class="hud-box"><label>SCORE</label><span id="gvScore" data-v="0">0</span></div>
+    <div class="hud-box"><label>BEST</label><span id="gvBest">0</span></div>
+    <div class="hud-btns">
+      <button class="icon-btn" id="gvPause" title="Pause"><svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><rect x="6" y="5" width="4" height="14" rx="1" fill="currentColor"/><rect x="14" y="5" width="4" height="14" rx="1" fill="currentColor"/></svg></button>
+      <button class="icon-btn" id="gvRestart" title="Restart">↻</button>
+    </div>
+  </div>
+  <div id="stage"></div>
+  <div id="tpad"></div>
+
+  <div class="ov" id="ovStart"><div class="ovbox">
+    <h2 id="ovsTitle"></h2><p id="ovsHelp" class="dim"></p>
+    <button class="btn big magnet" id="ovsGo">▶ START</button>
+    <p id="ovsCtl" class="dim small"></p>
+  </div></div>
+
+  <div class="ov" id="ovPause"><div class="ovbox">
+    <h2>PAUSED</h2>
+    <button class="btn big" id="ovpResume">RESUME</button>
+    <button class="btn" id="ovpRestart">RESTART</button>
+    <button class="btn ghost" id="ovpQuit">QUIT</button>
+  </div></div>
+
+  <div class="ov" id="ovOver"><div class="ovbox">
+    <h2 id="ovoTitle">GAME OVER</h2>
+    <p id="ovoBadge" class="badge hidden">★ NEW BEST ★</p>
+    <div id="ovoScore" class="bigscore">0</div>
+    <p id="ovoMsg" class="dim"></p>
+    <p id="ovoBest" class="dim small"></p>
+    <button class="btn big magnet" id="ovoAgain">PLAY AGAIN</button>
+    <button class="btn ghost" id="ovoQuit">QUIT</button>
+  </div></div>
+
+  <div class="ov" id="ovHelp"><div class="ovbox">
+    <h2 id="ovhTitle"></h2><p id="ovhBody" class="dim"></p>
+    <button class="btn" id="ovhClose">CLOSE</button>
+  </div></div>
+</div>
+
+<div class="ov" id="fbOv"><div class="ovbox">
+  <h2>FEEDBACK</h2>
+  <p class="dim small">Bug, saran, atau cerita apa aja. Dikirim langsung ke tim, tanpa akun.</p>
+  <form id="fbForm" autocomplete="off">
+    <label class="srow"><span>Jenis</span>
+      <select id="fbCat" class="fb-field"><option value="bug">Bug</option><option value="idea">Saran</option><option value="other">Lainnya</option></select></label>
+    <textarea id="fbMsg" class="fb-field" rows="5" maxlength="1000" placeholder="Ceritain yang kamu rasain…" required></textarea>
+    <input id="fbContact" class="fb-field" type="text" maxlength="120" placeholder="Kontak (opsional)">
+    <input id="fbHp" name="website" type="text" tabindex="-1" aria-hidden="true" autocomplete="off" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0">
+    <p id="fbStatus" class="dim small" aria-live="polite"></p>
+    <div class="fb-actions">
+      <button class="btn" id="fbSend" type="submit">KIRIM</button>
+      <button class="btn ghost" id="fbClose" type="button">TUTUP</button>
+    </div>
+  </form>
+</div></div>
+<div class="ov" id="settings"><div class="ovbox">
+  <h2>SETTINGS</h2>
+  <label class="srow"><span>Sound effects</span><input type="checkbox" id="setSound"></label>
+  <label class="srow"><span>Music (BGM)</span><input type="checkbox" id="setMusic"></label>
+  <label class="srow"><span>Volume <em id="volVal">85%</em></span><input type="range" id="setVol" min="0" max="100" value="85"></label>
+  <div class="srow"><span>Theme</span><div id="themeSeg" data-v="auto"><button data-th="auto">Auto</button><button data-th="light">Light</button><button data-th="dark">Dark</button></div></div>
+  <label class="srow"><span>Lebay mode <em>animasi 2x</em></span><input type="checkbox" id="setLebay"></label>
+  <label class="srow"><span>Haptic feedback <em>getar</em></span><input type="checkbox" id="setHaptic"></label>
+  <label class="srow"><span>Reduce motion</span><input type="checkbox" id="setRM"></label>
+  <button class="btn ghost" id="setWipe">RESET ALL DATA</button>
+  <button class="btn" id="setClose">CLOSE</button>
+</div></div>
+
+<div id="toast"></div>
+<script type="module" src="script.js"></script>
+</body>
+</html>

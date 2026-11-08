@@ -1,0 +1,11 @@
+{
+  "name": "moca-site",
+  "private": true,
+  "type": "module",
+  "version": "2.0.0",
+  "description": "MOCA arcade site + feedback backend (Vercel Functions + Upstash Redis)",
+  "scripts": {
+    "test": "node --test tests/feedback.test.mjs"
+  },
+  "engines": { "node": ">=18" }
+}
